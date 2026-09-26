@@ -47,11 +47,11 @@ final class PasteService
     {
         $content = trim($content);
         if ($content === '') {
-            throw new RuntimeException('متن پیست نمی‌تواند خالی باشد.');
+            throw new RuntimeException('پیست نمی‌تواند خالی باشد.');
         }
 
         if (mb_strlen($content) > 50000) {
-            throw new RuntimeException('متن پیست بیش از حد مجاز است.');
+            throw new RuntimeException('پیست بیش از حد مجاز است.');
         }
 
         if (!array_key_exists($expirationKey, self::EXPIRATION_OPTIONS)) {
@@ -229,10 +229,10 @@ final class PasteService
         }
     }
 
-    private function generateUniqueShortCode(int $maxRetries = 15): string
+    private function generateUniqueShortCode(int $maxRetries = 40): string
     {
         for ($i = 0; $i < $maxRetries; $i++) {
-            $code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+            $code = str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
             if (!$this->pasteModel->existsByCode($code)) {
                 return $code;
             }

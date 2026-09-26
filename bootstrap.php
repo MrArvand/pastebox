@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Core\Config;
+use App\Core\Env;
 
 define('BASE_PATH', __DIR__);
 
@@ -26,6 +27,8 @@ spl_autoload_register(static function (string $class): void {
         require_once $file;
     }
 });
+
+Env::load(BASE_PATH . '/.env');
 
 date_default_timezone_set((string) Config::get('app.timezone', 'UTC'));
 

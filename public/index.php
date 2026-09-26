@@ -32,11 +32,12 @@ $router = new Router();
 
 $router->get('/', [PasteController::class, 'createForm']);
 $router->get('/api/stats/pastes', [PasteController::class, 'pastesStats']);
+$router->get('/api/pastes/{code}', [PasteController::class, 'pasteAvailability'], ['code' => '\d{4}|\d{6}']);
 $router->post('/paste', [PasteController::class, 'store']);
 $router->get('/attachment/{id}/download', [PasteController::class, 'downloadAttachment'], ['id' => '\d+']);
-$router->post('/{code}/unlock', [PasteController::class, 'unlock'], ['code' => '\d{6}']);
-$router->get('/{code}/qr.svg', [PasteController::class, 'qrSvg'], ['code' => '\d{6}']);
-$router->get('/{code}', [PasteController::class, 'show'], ['code' => '\d{6}']);
+$router->post('/{code}/unlock', [PasteController::class, 'unlock'], ['code' => '\d{6}|\d{4}']);
+$router->get('/{code}/qr.svg', [PasteController::class, 'qrSvg'], ['code' => '\d{6}|\d{4}']);
+$router->get('/{code}', [PasteController::class, 'show'], ['code' => '\d{6}|\d{4}']);
 $router->get('/404', static function (): void {
     View::render('errors.404', ['title' => 'صفحه پیدا نشد'], 404);
 });

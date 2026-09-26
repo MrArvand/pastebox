@@ -31,7 +31,7 @@ final class PasteController
         $maxUploadSize = (int) Config::get('app.max_upload_size', 268435456);
 
         View::render('paste.create', [
-            'title' => 'PasteBox | اشتراک‌گذاری امن متن و فایل',
+            'title' => 'PasteBox | اشتراک‌گذاری امن پیست و فایل',
             'error' => flash('error'),
             'successLink' => flash('success_link'),
             'successCode' => flash('success_code'),
@@ -55,6 +55,26 @@ final class PasteController
         $count = $this->pasteService->latestPasteId();
         echo json_encode(['count' => $count]);
         exit;
+    }
+
+    /** @param array<string,string> $params */
+    public function pasteAvailability(Request $request, array $params): void
+    {
+        if (!$this->rateLimiter->hit('paste:lookup:' . $request->ip(), 30, 300)) {
+            Response::json(['ok' => false, 'error' => 'تعداد درخواست‌ها زیاد است. چند دقیقه بعد دوباره تلاش کنید.'], 429);
+        }
+
+        $code = (string) ($params['code'] ?? '');
+        $paste = $this->pasteService->findPasteByCode($code);
+        if ($paste === null) {
+            Response::json(['ok' => false, 'error' => 'کد کامل یا معتبر نیست؛ دوباره بررسی کنید.'], 404);
+        }
+
+        if ($this->pasteService->isExpired($paste)) {
+            Response::json(['ok' => false, 'error' => 'این پیست منقضی شده است.'], 410);
+        }
+
+        Response::json(['ok' => true]);
     }
 
     /** @param array<string,string> $params */

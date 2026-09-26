@@ -24,7 +24,7 @@ if (!function_exists('asset_url')) {
     function asset_url(string $path): string
     {
         $normalizedPath = ltrim($path, '/');
-        $url = app_url($normalizedPath);
+        $url = '/' . $normalizedPath;
         $fullPath = BASE_PATH . '/public/' . $normalizedPath;
 
         if (!is_file($fullPath)) {

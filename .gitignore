@@ -1,3 +1,6 @@
+.env
+.env.local
+
 /storage/uploads/*
 !/storage/uploads/.gitkeep
 !/storage/uploads/.htaccess

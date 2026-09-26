@@ -12,8 +12,7 @@ declare(strict_types=1);
     <meta name="description" content="PasteBox - پیست‌باکس، اشتراک‌گذاری امن پیست و فایل">
     <link rel="stylesheet" href="<?= e(asset_url('assets/css/app.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset_url('assets/css/dot-field.css')) ?>">
-    <link rel="icon" type="image/png" href="<?= e(app_url('favicon-96x96.png')) ?>" sizes="96x96">
-    <link rel="icon" type="image/svg+xml" href="<?= e(app_url('favicon.svg')) ?>">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="<?= e(app_url('apple-touch-icon.png')) ?>">
     <meta name="apple-mobile-web-app-title" content="PasteBox">
     <link rel="manifest" href="<?= e(app_url('site.webmanifest')) ?>">

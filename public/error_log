@@ -1,0 +1,100 @@
+[06-May-2026 21:43:44 Asia/Tehran] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.33. in /home/pasteb/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pasteb/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pasteb/public_html/vendor/autoload.php(22): ComposerAutoloaderInitf23edb42c89f02ec3cbd882b0a8ee5fc::getLoader()
+#2 /home/pasteb/public_html/bootstrap.php(11): require_once('/home/pasteb/pu...')
+#3 /home/pasteb/public_html/public/index.php(12): require_once('/home/pasteb/pu...')
+#4 {main}
+  thrown in /home/pasteb/public_html/vendor/composer/platform_check.php on line 22
+[06-May-2026 21:45:41 Asia/Tehran] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.33. in /home/pasteb/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pasteb/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pasteb/public_html/vendor/autoload.php(22): ComposerAutoloaderInitf23edb42c89f02ec3cbd882b0a8ee5fc::getLoader()
+#2 /home/pasteb/public_html/bootstrap.php(11): require_once('/home/pasteb/pu...')
+#3 /home/pasteb/public_html/public/index.php(12): require_once('/home/pasteb/pu...')
+#4 {main}
+  thrown in /home/pasteb/public_html/vendor/composer/platform_check.php on line 22
+[06-May-2026 21:45:42 Asia/Tehran] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.33. in /home/pasteb/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pasteb/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pasteb/public_html/vendor/autoload.php(22): ComposerAutoloaderInitf23edb42c89f02ec3cbd882b0a8ee5fc::getLoader()
+#2 /home/pasteb/public_html/bootstrap.php(11): require_once('/home/pasteb/pu...')
+#3 /home/pasteb/public_html/public/index.php(12): require_once('/home/pasteb/pu...')
+#4 {main}
+  thrown in /home/pasteb/public_html/vendor/composer/platform_check.php on line 22
+[06-May-2026 21:45:44 Asia/Tehran] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.33. in /home/pasteb/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pasteb/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pasteb/public_html/vendor/autoload.php(22): ComposerAutoloaderInitf23edb42c89f02ec3cbd882b0a8ee5fc::getLoader()
+#2 /home/pasteb/public_html/bootstrap.php(11): require_once('/home/pasteb/pu...')
+#3 /home/pasteb/public_html/public/index.php(12): require_once('/home/pasteb/pu...')
+#4 {main}
+  thrown in /home/pasteb/public_html/vendor/composer/platform_check.php on line 22
+[20-May-2026 23:16:21 Asia/Tehran] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /home/pasteb/public_html/app/Core/Database.php:35
+Stack trace:
+#0 /home/pasteb/public_html/app/Core/Database.php(35): PDO->__construct()
+#1 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#2 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#3 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#4 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#5 {main}
+
+Next RuntimeException: Database connection failed. in /home/pasteb/public_html/app/Core/Database.php:41
+Stack trace:
+#0 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#1 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#2 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#3 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#4 {main}
+  thrown in /home/pasteb/public_html/app/Core/Database.php on line 41
+[20-May-2026 23:16:37 Asia/Tehran] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /home/pasteb/public_html/app/Core/Database.php:35
+Stack trace:
+#0 /home/pasteb/public_html/app/Core/Database.php(35): PDO->__construct()
+#1 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#2 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#3 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#4 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#5 {main}
+
+Next RuntimeException: Database connection failed. in /home/pasteb/public_html/app/Core/Database.php:41
+Stack trace:
+#0 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#1 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#2 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#3 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#4 {main}
+  thrown in /home/pasteb/public_html/app/Core/Database.php on line 41
+[20-May-2026 23:17:02 Asia/Tehran] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /home/pasteb/public_html/app/Core/Database.php:35
+Stack trace:
+#0 /home/pasteb/public_html/app/Core/Database.php(35): PDO->__construct()
+#1 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#2 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#3 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#4 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#5 {main}
+
+Next RuntimeException: Database connection failed. in /home/pasteb/public_html/app/Core/Database.php:41
+Stack trace:
+#0 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#1 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#2 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#3 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#4 {main}
+  thrown in /home/pasteb/public_html/app/Core/Database.php on line 41
+[20-May-2026 23:17:21 Asia/Tehran] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /home/pasteb/public_html/app/Core/Database.php:35
+Stack trace:
+#0 /home/pasteb/public_html/app/Core/Database.php(35): PDO->__construct()
+#1 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#2 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#3 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#4 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#5 {main}
+
+Next RuntimeException: Database connection failed. in /home/pasteb/public_html/app/Core/Database.php:41
+Stack trace:
+#0 /home/pasteb/public_html/app/Models/Paste.php(16): App\Core\Database::connection()
+#1 /home/pasteb/public_html/app/Services/PasteService.php(33): App\Models\Paste->__construct()
+#2 /home/pasteb/public_html/app/Core/View.php(19): App\Services\PasteService->__construct()
+#3 /home/pasteb/public_html/public/index.php(53): App\Core\View::render()
+#4 {main}
+  thrown in /home/pasteb/public_html/app/Core/Database.php on line 41

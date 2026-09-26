@@ -1,0 +1,5 @@
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+!/storage/uploads/.htaccess
+/storage/logs/*
+!/storage/logs/.gitkeep

@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Route everything to public entrypoint when project root is document root.
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]

@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS pastes (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     uuid CHAR(36) NOT NULL,
-    short_code VARCHAR(6) NOT NULL,
+    short_code VARCHAR(6) NOT NULL, -- new codes are 4 digits; width 6 keeps older links
     content MEDIUMTEXT NOT NULL,
     password_hash VARCHAR(255) NULL,
     burn_after_reading TINYINT(1) NOT NULL DEFAULT 0,

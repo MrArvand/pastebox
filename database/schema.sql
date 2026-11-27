@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS pastes (
     content MEDIUMTEXT NOT NULL,
     password_hash VARCHAR(255) NULL,
     burn_after_reading TINYINT(1) NOT NULL DEFAULT 0,
+    burned_at DATETIME NULL,
     expires_at DATETIME NOT NULL,
     created_at DATETIME NOT NULL,
     PRIMARY KEY (id),

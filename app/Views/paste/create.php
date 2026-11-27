@@ -52,7 +52,7 @@ $hasError = is_string($error ?? null) && $error !== '';
 
             <div class="editor">
                 <label class="visually-hidden" for="content">پیست شما</label>
-                <textarea id="content" name="content" maxlength="50000" required placeholder="پیست، کد یا یادداشت محرمانه‌تان را اینجا بنویسید..."<?= $hasCreatedCode ? '' : ' autofocus' ?>></textarea>
+                <textarea id="content" name="content" maxlength="50000" placeholder="پیست، کد یا یادداشت محرمانه‌تان را اینجا بنویسید..."<?= $hasCreatedCode ? '' : ' autofocus' ?>></textarea>
                 <span id="content_counter" class="char-count" aria-live="polite">۰ از ۵۰٬۰۰۰</span>
             </div>
 
@@ -304,6 +304,24 @@ $hasError = is_string($error ?? null) && $error !== '';
         const uploadProgressPercent = document.getElementById("upload_progress_percent");
         const uploadProgressLabel = document.getElementById("upload_progress_label");
 
+        const contentInput = document.getElementById("content");
+        const contentCounter = document.getElementById("content_counter");
+        const pasteSubmitBtn = document.getElementById("pasteSubmitBtn");
+        const submitLabel = pasteSubmitBtn?.querySelector(".btn-label");
+        const hasAttachment = () => attachmentInput instanceof HTMLInputElement && !!attachmentInput.files?.length;
+        const syncComposer = () => {
+            if (!(contentInput instanceof HTMLTextAreaElement)) return;
+            const maxLength = Number(contentInput.getAttribute("maxlength")) || 50000;
+            if (contentCounter) {
+                contentCounter.textContent = `${contentInput.value.length.toLocaleString("fa-IR")} از ${maxLength.toLocaleString("fa-IR")}`;
+            }
+            if (pasteSubmitBtn instanceof HTMLButtonElement && submitLabel?.textContent !== "در حال ارسال...") {
+                pasteSubmitBtn.disabled = contentInput.value.trim() === "" && !hasAttachment();
+            }
+        };
+        contentInput?.addEventListener("input", syncComposer);
+        syncComposer();
+
         const resetUploadProgress = () => {
             if (!uploadProgressPanel) return;
             uploadProgressPanel.setAttribute("hidden", "");
@@ -328,6 +346,7 @@ $hasError = is_string($error ?? null) && $error !== '';
                 filePreview?.setAttribute("hidden", "");
                 attachmentDropZone?.removeAttribute("hidden");
                 resetUploadProgress();
+                syncComposer();
                 return;
             }
             if (attachmentName) attachmentName.textContent = file.name;
@@ -335,6 +354,7 @@ $hasError = is_string($error ?? null) && $error !== '';
             attachmentDropZone.setAttribute("hidden", "");
             filePreview.removeAttribute("hidden");
             resetUploadProgress();
+            syncComposer();
         };
 
         const assignFile = (file) => {
@@ -387,23 +407,6 @@ $hasError = is_string($error ?? null) && $error !== '';
             renderFile();
         }
 
-        const contentInput = document.getElementById("content");
-        const contentCounter = document.getElementById("content_counter");
-        const pasteSubmitBtn = document.getElementById("pasteSubmitBtn");
-        const submitLabel = pasteSubmitBtn?.querySelector(".btn-label");
-        const syncComposer = () => {
-            if (!(contentInput instanceof HTMLTextAreaElement)) return;
-            const maxLength = Number(contentInput.getAttribute("maxlength")) || 50000;
-            if (contentCounter) {
-                contentCounter.textContent = `${contentInput.value.length.toLocaleString("fa-IR")} از ${maxLength.toLocaleString("fa-IR")}`;
-            }
-            if (pasteSubmitBtn instanceof HTMLButtonElement && submitLabel?.textContent !== "در حال ارسال...") {
-                pasteSubmitBtn.disabled = contentInput.value.trim() === "";
-            }
-        };
-        contentInput?.addEventListener("input", syncComposer);
-        syncComposer();
-
         const pasteForm = document.getElementById("pasteForm");
         const showFormError = (message) => {
             const box = document.getElementById("pasteFormError");
@@ -422,11 +425,11 @@ $hasError = is_string($error ?? null) && $error !== '';
             pasteForm.addEventListener("submit", (event) => {
                 event.preventDefault();
                 clearFormError();
-                if (!(contentInput instanceof HTMLTextAreaElement) || !contentInput.value.trim()) {
-                    contentInput?.reportValidity();
+                const file = attachmentInput instanceof HTMLInputElement ? attachmentInput.files?.[0] : null;
+                if (!(contentInput instanceof HTMLTextAreaElement) || (!contentInput.value.trim() && !file)) {
+                    showFormError("متن پیست یا فایل پیوست را وارد کنید.");
                     return;
                 }
-                const file = attachmentInput instanceof HTMLInputElement ? attachmentInput.files?.[0] : null;
                 if (file && file.size > maxUpload) {
                     showFormError(`حجم فایل بیش از حد مجاز است (حداکثر ${formatBytes(maxUpload)}).`);
                     return;

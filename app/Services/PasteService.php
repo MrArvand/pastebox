@@ -46,11 +46,7 @@ final class PasteService
     ): array
     {
         $content = trim($content);
-        if ($content === '') {
-            throw new RuntimeException('پیست نمی‌تواند خالی باشد.');
-        }
-
-        if (mb_strlen($content) > 50000) {
+        if ($content !== '' && mb_strlen($content) > 50000) {
             throw new RuntimeException('پیست بیش از حد مجاز است.');
         }
 
@@ -67,6 +63,10 @@ final class PasteService
             : null;
 
         $attachmentPayload = $this->uploadService->save($file);
+
+        if ($content === '' && $attachmentPayload === null) {
+            throw new RuntimeException('پیست نمی‌تواند بدون متن و فایل باشد.');
+        }
 
         $shortCode = '';
         $created = false;
@@ -167,6 +167,21 @@ final class PasteService
     public function burnAfterReadingEnabled(array $paste): bool
     {
         return (int) ($paste['burn_after_reading'] ?? 0) === 1;
+    }
+
+    public function isBurned(array $paste): bool
+    {
+        return ($paste['burned_at'] ?? null) !== null;
+    }
+
+    public function markBurned(array $paste): void
+    {
+        $pasteId = (int) ($paste['id'] ?? 0);
+        if ($pasteId <= 0) {
+            return;
+        }
+
+        $this->pasteModel->markBurned($pasteId);
     }
 
     public function verifyPassword(array $paste, string $password): bool

@@ -139,6 +139,13 @@ final class PasteController
             return;
         }
 
+        $burnAfterReading = $this->pasteService->burnAfterReadingEnabled($paste);
+
+        if ($burnAfterReading && $this->pasteService->isBurned($paste)) {
+            View::render('errors.410', ['title' => 'این پیست قبلاً سوزانده شده است'], 410);
+            return;
+        }
+
         $unlocked = (bool) $request->sessionGet('paste_unlocked_' . $code, false);
         $needsPassword = $this->pasteService->requiresPassword($paste);
 
@@ -152,11 +159,14 @@ final class PasteController
         }
 
         $attachments = $this->pasteService->attachmentsForPaste((int) $paste['id']);
-        $burnAfterReading = $this->pasteService->burnAfterReadingEnabled($paste);
 
         if ($burnAfterReading) {
-            $this->pasteService->burnPaste($paste);
-            $request->sessionSet('paste_unlocked_' . $code, false);
+            if (count($attachments) > 0) {
+                $this->pasteService->markBurned($paste);
+            } else {
+                $this->pasteService->burnPaste($paste);
+                $request->sessionSet('paste_unlocked_' . $code, false);
+            }
         }
 
         View::render('paste.view', [
@@ -231,6 +241,8 @@ final class PasteController
             return;
         }
 
+        $burnAfterReading = $this->pasteService->burnAfterReadingEnabled($paste);
+
         $downloadName = str_replace('"', '', basename((string) $attachment['original_name']));
         header('Content-Description: File Transfer');
         header('Content-Type: ' . $attachment['mime_type']);
@@ -238,6 +250,10 @@ final class PasteController
         header('Content-Length: ' . filesize($filePath));
         header('X-Content-Type-Options: nosniff');
         readfile($filePath);
+
+        if ($burnAfterReading) {
+            $this->pasteService->burnPaste($paste);
+        }
         exit;
     }
 

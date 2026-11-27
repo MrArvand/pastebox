@@ -106,4 +106,10 @@ final class Paste
         $stmt = $this->db->prepare('DELETE FROM pastes WHERE id = :id');
         $stmt->execute([':id' => $id]);
     }
+
+    public function markBurned(int $id): void
+    {
+        $stmt = $this->db->prepare('UPDATE pastes SET burned_at = NOW(), content = \'\' WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+    }
 }
